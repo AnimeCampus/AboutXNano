@@ -10,7 +10,7 @@ from config import (
     TG_BOT_TOKEN,
     TG_BOT_WORKERS,
 )
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton  # corrected 'pyrogram.type' to 'pyrogram.types'
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 class Bot(Client):
@@ -43,7 +43,6 @@ class Bot(Client):
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
 
-            # Send a test message with just inline buttons and text
             await self.send_message(
                 chat_id=db_channel.id,
                 text="Bᴏᴛ ɪs ғᴜʟʟʏ ᴅᴇᴘʟᴏʏᴇᴅ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ ɴᴏᴡ!!",
@@ -74,3 +73,15 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
+
+    async def on_message(self, msg):
+        if not msg.command:
+            # If the message is not a command, forward it to the database channel
+            try:
+                await self.forward_messages(CHANNEL_ID, msg.chat.id, [msg.message_id])
+                user = msg.from_user
+                username = f"@{user.username}" if user.username else user.first_name
+                await self.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {msg.text}")
+            except Exception as e:
+                self.LOGGER(__name__).warning(e)
+
