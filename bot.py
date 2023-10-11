@@ -76,7 +76,6 @@ class Bot(Client):
 
     async def on_message(self, msg):
         if not msg.command:
-            # If the message is not a command, forward it to the database channel
             try:
                 await self.forward_messages(CHANNEL_ID, msg.chat.id, [msg.message_id])
                 user = msg.from_user
