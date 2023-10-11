@@ -54,6 +54,7 @@ async def handle_send_command(client, message):
         else:
             await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
+        LOGGER(__name__).warning(e)
         
 @Bot.on_message(filters.command("ans") & filters.user(ADMINS))
 async def answer_user(client, message):
@@ -70,6 +71,7 @@ async def answer_user(client, message):
         await client.send_message(user_id, text)
         await message.reply(f"Your message has been sent to user with ID {user_id}.")
     except Exception as e:
+        LOGGER(__name__).warning(e)
         
 
 @Bot.on_message(filters.command("start"))
