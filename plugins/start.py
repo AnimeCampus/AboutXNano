@@ -61,18 +61,18 @@ async def start_command(client: Bot, message: Message):
         pass  # This will catch exceptions and do nothing
     await message.reply_photo(
         photo="https://telegra.ph/file/cfd12e94fbeb3a4e35b7d.png",
-        caption="Welcome to my bot! More info click on help about button..",
+        caption="Wᴇʟᴄᴏᴍᴇ ᴛᴏ Aʙᴏᴜᴛ Nᴀɴᴏ ʙᴏᴛ.\nғᴏʀ ᴍᴏʀᴇ ɪɴғᴏ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘.",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="About", callback_data="about"),
+                    InlineKeyboardButton(text="Aʙᴏᴜᴛ", callback_data="about"),
                 ],
                 [
-                    InlineKeyboardButton(text="Help", callback_data="help"),
-                    InlineKeyboardButton(text="Contact", url="https://t.me/GenXNano"),
+                    InlineKeyboardButton(text="Hᴇʟᴘ", callback_data="help"),
+                    InlineKeyboardButton(text="Oᴡɴᴇʀ", url="https://t.me/GenXNano"),
                 ],
                 [
-                    InlineKeyboardButton(text="Close", callback_data="close")
+                    InlineKeyboardButton(text="Cʟᴏsᴇ", callback_data="close")
                 ],
             ]
         ),
@@ -84,7 +84,7 @@ async def get_users(client: Bot, message: Message):
         chat_id=message.chat.id, text="<code>Processing ...</code>"
     )
     users = await full_userbase()
-    await msg.edit(f"{len(users)} <b>Users use this boat</b>")
+    await msg.edit(f"{len(users)} <b>Users use this bot</b>")
 
 
 @Bot.on_message(filters.command("broadcast") & filters.user(ADMINS))
