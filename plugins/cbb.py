@@ -67,14 +67,8 @@ async def su_list_command(client: Client, message: Message):
             users_list += f"{user.first_name} (@{user.username})\n"
         except Exception as e:
             # Handle any errors here
-            users_list += f"User ID {user_id} - Error: {str(e)}\n"
-    
-    # Save the list to an admin.txt file
-    with open("admin.txt", "w") as admin_file:
-        admin_file.write(users_list)
-    
+            users_list += f"User ID {user_id} - Error: {str(e)}\n"            
     await message.reply(f"Admin Users:\n{users_list}")
-    await client.send_document(chat_id=message.chat.id, document="admin.txt")
-
+    
 
                      
