@@ -12,6 +12,7 @@ from config import (
 )
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import filters
+from bot import Bot
 
 class Bot(Client):
     def __init__(self):
