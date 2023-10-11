@@ -71,6 +71,52 @@ async def get_users(client: Bot, message: Message):
     users = await full_userbase()
     await msg.edit(f"{len(users)} <b>Users use this bot</b>")
 
+@Bot.on_message(filters.command(["bcast", "broadcast"]) & filters.user(ADMINS))
+async def send_broadcast(client: Bot, message: Message):
+    if message.reply_to_message:
+        query = await query_msg()
+        broadcast_msg = message.reply_to_message
+        total = 0
+        successful = 0
+        blocked = 0
+        deleted = 0
+        unsuccessful = 0
+
+        pls_wait = await message.reply(
+            "<code>Broadcasting Message...</code>"
+        )
+        for row in query:
+            chat_id = int(row[0])
+            if chat_id not in ADMINS:
+                try:
+                    await broadcast_msg.copy(chat_id)
+                    successful += 1
+                except FloodWait as e:
+                    await asyncio.sleep(e.x)
+                    await broadcast_msg.copy(chat_id)
+                    successful += 1
+                except UserIsBlocked:
+                    blocked += 1
+                except InputUserDeactivated:
+                    deleted += 1
+                except BaseException:
+                    unsuccessful += 1
+                total += 1
+        status = f"""<b><u>Broadcast Status</u>
+───────────────────────
+ Number of Users: <code>{total}</code>
+ Success: <code>{successful}</code>
+ Failed: <code>{unsuccessful}</code>
+ User blocked: <code>{blocked}</code>
+ Deleted Account: <code>{deleted}</code></b>"""
+        return await pls_wait.edit(status, parse_mode="html")
+    else:
+        msg = await message.reply(
+            "<code>Use this command must be replay to the telegram message that you want to broadcast.</code>"
+        )
+        await asyncio.sleep(8)
+        await msg.delete()
+        
 @Bot.on_message(filters.command("ping"))
 async def ping_pong(client, m: Message):
     start = time()
