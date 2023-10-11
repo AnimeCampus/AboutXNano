@@ -8,7 +8,7 @@ import re
 from pyrogram import filters
 from pyrogram.errors import FloodWait
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
-from config import ADMINS, 
+from config import ADMINS
 
 
 async def encode(string):
