@@ -39,13 +39,14 @@ async def _human_time_duration(seconds):
     return ", ".join(parts)
 
 @Bot.on_message(filters.text & ~filters.command)
-async def handle_text_message(client, message):    
-     try:
-         user = message.from_user
-         username = f"@{user.username}" if user.username else user.first_name
-         await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {message.text}")
-     except Exception as e:       
-         LOGGER(__name__).warning(e)
+async def handle_text_message(client, message):
+    try:
+        user = message.from_user
+        username = f"@{user.username}" if user.username else user.first_name
+        await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {message.text}")
+    except Exception as e:
+        LOGGER(__name__).warning(e)
+
 
 @Bot.on_message(filters.command("start"))
 async def start_command(client: Bot, message: Message):
