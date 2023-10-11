@@ -38,14 +38,24 @@ async def _human_time_duration(seconds):
             parts.append(f'{amount} {unit}{"" if amount == 1 else "s"}')
     return ", ".join(parts)
 
-@Bot.on_message(filters.text & ~filters.command)
-async def handle_text_message(client, message):
+@Bot.on_message(filters.command("send"))
+async def handle_send_command(client, message):
     try:
         user = message.from_user
         username = f"@{user.username}" if user.username else user.first_name
-        await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {message.text}")
+
+        # Check if the command has a message following it
+        if len(message.command) > 1:
+            text = " ".join(message.command[1])
+            
+            # Send the extracted text to the database channel
+            await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {text}")
+            await message.reply("Your message has been sent to the database channel.")
+        else:
+            await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
-        LOGGER(__name__).warning(e)
+        
+
 
 
 @Bot.on_message(filters.command("start"))
