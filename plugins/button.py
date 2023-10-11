@@ -10,7 +10,7 @@ def start_button(client):
     if not FORCE_SUB_CHANNEL and not FORCE_SUB_GROUP:
         buttons = [
             [
-                InlineKeyboardButton(text="Donate", callback_data="help"),
+                InlineKeyboardButton(text="Help", callback_data="help"),
                 InlineKeyboardButton(text="Close ", callback_data="close"),
             ],
         ]
@@ -21,7 +21,7 @@ def start_button(client):
                 InlineKeyboardButton(text="Group", url="https://t.me/+ja5muiJbYWEyMzVl"),
             ],
             [
-                InlineKeyboardButton(text="Donate", callback_data="help"),
+                InlineKeyboardButton(text="Help", callback_data="help"),
                 InlineKeyboardButton(text="Close", callback_data="close"),
             ],
         ]
@@ -32,7 +32,7 @@ def start_button(client):
                 InlineKeyboardButton(text="Channel", url=client.invitelink),
             ],
             [
-                InlineKeyboardButton(text="Donate", callback_data="help"),
+                InlineKeyboardButton(text="Help", callback_data="help"),
                 InlineKeyboardButton(text="Close", callback_data="close"),
             ],
         ]
@@ -40,7 +40,7 @@ def start_button(client):
     if FORCE_SUB_CHANNEL and FORCE_SUB_GROUP:
         buttons = [
             [
-                InlineKeyboardButton(text="Donate", callback_data="help"),
+                InlineKeyboardButton(text="Help", callback_data="help"),
             ],
             [
                 InlineKeyboardButton(text="Channel 1", url=client.invitelink),
