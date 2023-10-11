@@ -14,7 +14,7 @@ from pyrogram.types import InlineKeyboardMarkup, Message
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from helper_func import decode, get_messages, subsall, subsch, subsgc
+from helper_func import decode, get_messages
 
 
 START_TIME = datetime.utcnow()
