@@ -1,8 +1,6 @@
 import pyromod.listen
 import sys
-
 from pyrogram import Client
-
 from config import (
     API_HASH,
     APP_ID,
@@ -12,6 +10,7 @@ from config import (
     TG_BOT_TOKEN,
     TG_BOT_WORKERS,
 )
+from pyrogram import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 class Bot(Client):
@@ -43,7 +42,20 @@ class Bot(Client):
         try:
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
-            test_message = await self.send_message(chat_id=db_channel.id, text="Test Message", disable_notification=True)
+
+            # Send a test message with an image and an inline button
+            test_message = await self.send_photo(
+                chat_id=db_channel.id,
+                photo="https://telegra.ph/file/f0bb24dae0b860462acdf.png",
+                caption="Bᴏᴛ ɪs ғᴜʟʟʏ ᴅᴇᴘʟᴏʏᴇᴅ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ ɴᴏᴡ!!",
+                reply_markup=InlineKeyboardMarkup(
+                    [[                 
+                        InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ", url="https://t.me/AboutXNano"),
+                        InlineKeyboardButton("Oᴡɴᴇʀ", url=f"https://t.me/{OWNER}")                            
+                    ]]
+                ),
+                disable_notification=True
+            )
             await test_message.delete()
             self.LOGGER(__name__).info(
                 f"CHANNEL_ID Database detected!\n┌ Title: {db_channel.title}\n└ Chat ID: {db_channel.id}\n——"
@@ -60,9 +72,6 @@ class Bot(Client):
         self.LOGGER(__name__).info(
             f"[🔥 SUCCESSFULLY ACTIVATED! 🔥]\n\nBOT Created by @{OWNER}\nIf @{OWNER} needs assistance, please ask in the group https://t.me/SharingUserbot"
         )
-
-        # Send a deployment message to the specified database channel
-        await self.send_message(chat_id=db_channel.id, text="Bot is fully deployed and active now!")
 
     async def stop(self, *args):
         await super().stop()
