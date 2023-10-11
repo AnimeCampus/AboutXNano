@@ -1,7 +1,3 @@
-# (©)Codexbotz
-# Recode by @mrismanaziz
-# t.me/SharingUserbot & t.me/Lunatic0de
-
 import asyncio
 from datetime import datetime
 from time import time
@@ -14,9 +10,6 @@ from pyrogram.types import InlineKeyboardMarkup, Message
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from helper_func import decode, get_messages
-
-
 START_TIME = datetime.utcnow()
 START_TIME_ISO = START_TIME.replace(microsecond=0).isoformat()
 TIME_DURATION_UNITS = (
@@ -26,7 +19,6 @@ TIME_DURATION_UNITS = (
     ("min", 60),
     ("sec", 1),
 )
-
 
 async def _human_time_duration(seconds):
     if seconds == 0:
@@ -51,23 +43,24 @@ async def start_command(client: Bot, message: Message):
         await add_user(id, user_name)
     except:
         pass  # This will catch exceptions and do nothing
-    await message.reply_photo(
-        photo="https://telegra.ph/file/f0bb24dae0b860462acdf.png",
-        caption="Wᴇʟᴄᴏᴍᴇ ᴛᴏ Aʙᴏᴜᴛ Nᴀɴᴏ ʙᴏᴛ.\nғᴏʀ ᴍᴏʀᴇ ɪɴғᴏ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘.",
+    await message.reply(
+        "👋 <b>Welcome to About Nano Bot</b> 🤖\n\n"
+        "Use the buttons below to explore the features:",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="Aʙᴏᴜᴛ", callback_data="about"),
+                    InlineKeyboardButton("About", callback_data="about"),
                 ],
                 [
-                    InlineKeyboardButton(text="Hᴇʟᴘ", callback_data="help"),
-                    InlineKeyboardButton(text="Cʜᴀɴɴᴇʟ", url="https://t.me/AboutXNano"),
+                    InlineKeyboardButton("Help", callback_data="help"),
+                    InlineKeyboardButton("Channel", url="https://t.me/AboutXNano"),
                 ],
                 [
-                    InlineKeyboardButton(text="Cʟᴏsᴇ", callback_data="close")
+                    InlineKeyboardButton("Close", callback_data="close")
                 ],
             ]
         ),
+        parse_mode="html"
     )
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
@@ -78,54 +71,6 @@ async def get_users(client: Bot, message: Message):
     users = await full_userbase()
     await msg.edit(f"{len(users)} <b>Users use this bot</b>")
 
-
-@Bot.on_message(filters.command("broadcast") & filters.user(ADMINS))
-async def send_text(client: Bot, message: Message):
-    if message.reply_to_message:
-        query = await query_msg()
-        broadcast_msg = message.reply_to_message
-        total = 0
-        successful = 0
-        blocked = 0
-        deleted = 0
-        unsuccessful = 0
-
-        pls_wait = await message.reply(
-            "<code>Broadcasting Message...</code>"
-        )
-        for row in query:
-            chat_id = int(row[0])
-            if chat_id not in ADMINS:
-                try:
-                    await broadcast_msg.copy(chat_id, protect_content=PROTECT_CONTENT)
-                    successful += 1
-                except FloodWait as e:
-                    await asyncio.sleep(e.x)
-                    await broadcast_msg.copy(chat_id, protect_content=PROTECT_CONTENT)
-                    successful += 1
-                except UserIsBlocked:
-                    blocked += 1
-                except InputUserDeactivated:
-                    deleted += 1
-                except BaseException:
-                    unsuccessful += 1
-                total += 1
-        status = f"""<b><u>Successful Broadcast</u>
-───────────────────────
- Number of Users: <code>{total}</code>
- Success: <code>{successful}</code>
- Failed: <code>{unsuccessful}</code>
- User blocked: <code>{blocked}</code>
- Deleted Account: <code>{deleted}</code></b>"""
-        return await pls_wait.edit(status)
-    else:
-        msg = await message.reply(
-            "<code>Use this command must be replay to the telegram message that you want to broadcast.</code>"
-        )
-        await asyncio.sleep(8)
-        await msg.delete()
-
-
 @Bot.on_message(filters.command("ping"))
 async def ping_pong(client, m: Message):
     start = time()
@@ -135,11 +80,11 @@ async def ping_pong(client, m: Message):
     m_reply = await m.reply_text("Pinging...")
     delta_ping = time() - start
     await m_reply.edit_text(
-        "<b>PONG!!</b>🏓 \n"
-        f"<b>• Pinger -</b> <code>{delta_ping * 1000:.3f}ms</code>\n"
-        f"<b>• Uptime -</b> <code>{uptime}</code>\n"
+        "<b>PONG!!</b> 🏓\n"
+        f"<b>Pinger:</b> <code>{delta_ping * 1000:.3f}ms</code>\n"
+        f"<b>Uptime:</b> <code>{uptime}</code>",
+        parse_mode="html"
     )
-
 
 @Bot.on_message(filters.command("uptime"))
 async def get_uptime(client, m: Message):
@@ -149,5 +94,7 @@ async def get_uptime(client, m: Message):
     await m.reply_text(
         "🤖 <b>Bot Status:</b>\n"
         f"• <b>Uptime:</b> <code>{uptime}</code>\n"
-        f"• <b>Start Time:</b> <code>{START_TIME_ISO}</code>"
-    )
+        f"• <b>Start Time:</b> <code>{START_TIME_ISO}</code>",
+        parse_mode="html"
+)
+    
