@@ -6,26 +6,17 @@ from pyrogram.types import InlineKeyboardButton
 
 class Data:
     HELP = """
-<b>How to Use this Bot
+Lᴏᴏᴋɪɴɢ ғᴏʀ ᴀ sᴇᴀᴍʟᴇss ʜᴏsᴛɪɴɢ sᴏʟᴜᴛɪᴏɴ ғᴏʀ ʏᴏᴜʀ Tᴇʟᴇɢʀᴀᴍ ʙᴏᴛ? Yᴏᴜ'ᴠᴇ ᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ʀɪɢʜᴛ ᴘʟᴀᴄᴇ! 🤖
 
-  ❏ Commands for BOT Users
-  ├ /start - Starts the Bot
-  ├ /about - About this Bot
-  ├ /help - Help this Bot Command
-  ├ /ping - To check live bots
-  └ /uptime - To see bot status
+🌟 Oᴜʀ Fᴇᴀᴛᴜʀᴇs:
+✅ Uʟᴛʀᴀ-ғᴀsᴛ sᴇʀᴠᴇʀs ғᴏʀ ʟᴀɢ-ғʀᴇᴇ ᴘᴇʀғᴏʀᴍᴀɴᴄᴇ.
+✅ Cᴏᴍᴘᴇᴛɪᴛɪᴠᴇ ᴘʀɪᴄɪɴɢ ᴛʜᴀᴛ ᴡᴏɴ'ᴛ ʙʀᴇᴀᴋ ᴛʜᴇ ʙᴀɴᴋ.
+✅ Rᴏᴜɴᴅ-ᴛʜᴇ-ᴄʟᴏᴄᴋ sᴜᴘᴘᴏʀᴛ ᴛᴏ ᴋᴇᴇᴘ ʏᴏᴜʀ ʙᴏᴛ ʀᴜɴɴɪɴɢ sᴍᴏᴏᴛʜʟʏ.
+✅ Hᴀssʟᴇ-ғʀᴇᴇ sᴇᴛᴜᴘ ᴀɴᴅ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ.
 
-  ❏ Commands For BOT Admins
-  ├ /logs - To view bot logs
-  ├ /setvar - To set var with dibot command
-  ├ /delvar - To remove var with dibot command
-  ├ /getvar - To see one of the var with dibot command
-  ├ /users - To view bot user statistics
-  ├ /batch - To link more than one file
-  ├ /speedtest - To test the bot server speed
-  └ /broadcast - To send a broadcast message to the bot user
-  
- 👨‍💻 Developed by </b><a href='https://t.me/Campus_Bot_Updates'>Anime Campus</a>
+Dᴏɴ'ᴛ ᴍɪss ᴏᴜᴛ ᴏɴ ᴛʜɪs ᴏᴘᴘᴏʀᴛᴜɴɪᴛʏ ᴛᴏ ᴛᴀᴋᴇ ʏᴏᴜʀ ʙᴏᴛ ᴛᴏ ᴛʜᴇ ɴᴇxᴛ ʟᴇᴠᴇʟ. Rᴇᴀᴄʜ ᴏᴜᴛ ᴛᴏ ᴜs ɴᴏᴡ ғᴏʀ ᴘʀɪᴄɪɴɢ ᴅᴇᴛᴀɪʟs! 📩😄"
+
+Fᴇᴇʟ ғʀᴇᴇ ᴛᴏ ᴜsᴇ ᴛʜɪs ᴜᴘᴅᴀᴛᴇᴅ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴀᴋᴇ ʏᴏᴜʀ ᴏғғᴇʀ ᴍᴏʀᴇ ᴀᴘᴘᴇᴀʟɪɴɢ. Iғ ʏᴏᴜ ɴᴇᴇᴅ ғᴜʀᴛʜᴇʀ ᴀssɪsᴛᴀɴᴄᴇ ᴏʀ ʜᴀᴠᴇ sᴘᴇᴄɪғɪᴄ ʀᴇǫᴜᴇsᴛs, ʟᴇᴛ ᴍᴇ ᴋɴᴏᴡ! 😊
 """
 
     close = [
@@ -47,13 +38,29 @@ class Data:
     ]
 
     ABOUT = """
-<b>About this Bot:
+Mʏ sᴇʟғ Nᴀɴᴏ.. 🔇😵
 
- @Anime_Campus_Bot is a Telegram Bot for storing posts or files that can be accessed via a special link.
+Fʀᴏᴍ ᴀ ʟᴏɴᴇʟʏ ᴅɪsᴛʀɪᴄᴛ, ᴛᴏ ᴀ Nᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ᴄɪᴛʏ
+Eᴠᴇʀʏᴛʜɪɴɢ ʜᴀs ᴀ sᴛᴏʀʏ, ᴀ ᴍᴏᴛɪᴠᴇ, ᴀ ɢᴏᴀʟ!
 
-  • Creator: @MH17_KUNAL
-  • Framework: Pyrograms
-  • Channel :@Campus_Bot_Updates
+Rᴇᴀʟ ɴᴀᴍᴇ → Kᴜɴᴀʟ
 
- 👨‍💻 Developed by @Anime_Campus
+Aɢᴇ → 𝟷𝟾
+
+Lɪᴠᴇ ʙʏ → Aʜᴇᴍᴇᴅɴᴀɢᴀʀ 🔺
+
+Eᴅᴜᴄᴀᴛɪᴏɴ (ᴏɴɢᴏɪɴɢ) →Fʏ Bᴄs😪
+
+𝟷𝟸ᴛʜ Pᴀss Oᴜᴛ → 88.20% 🌈
+
+Oᴡɴs → @WarUserBot  👮
+
+Bɪʀᴛʜᴅᴀᴛᴇ → 𝟶𝟹/Jᴜɴᴇ/𝟸𝟶𝟶𝟻 💻
+
+Iɴ ʜᴇʀᴇ sɪɴᴄᴇ → 𝟸𝟶𝟸𝟶 😂
+
+Mᴏʀᴇᴇ ↓
+Sᴏᴄʜ ʀʜᴇ ʜᴏɴɢᴇ ɴᴀᴍᴇ ɴᴀɴᴏ ᴋʏᴜ ʀᴋʜᴀ.. 
+
+Mᴇʀɪ ᴍᴀʀᴊɪ ᴍᴇ ᴋᴜᴄʜ ʙʜɪ ʀᴋʜᴜ 😈🙂
 """
