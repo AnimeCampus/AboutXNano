@@ -10,7 +10,7 @@ from config import (
     TG_BOT_TOKEN,
     TG_BOT_WORKERS,
 )
-from pyrogram import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.type import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 class Bot(Client):
