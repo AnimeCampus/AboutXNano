@@ -11,7 +11,7 @@ from logging.handlers import RotatingFileHandler
 load_dotenv("config.env")
 
 # Bot token dari @Botfather
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "5601546958:AAF08tJAh9O-IGeHcYqH_-MBDsBcx3CPkqA")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "6206599982:AAGqJ84tpTzhdKYzNRMp2kPdcpN0_1zz5K4")
 
 # API ID Anda dari my.telegram.org
 APP_ID = int(os.environ.get("APP_ID", "16743442"))
@@ -20,7 +20,7 @@ APP_ID = int(os.environ.get("APP_ID", "16743442"))
 API_HASH = os.environ.get("API_HASH", "12bbd720f4097ba7713c5e40a11dfd2a")
 
 # ID Channel Database
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1001750485720"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1001905486162"))
 
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "The_NanamiiKento")
@@ -50,7 +50,7 @@ START_MSG = os.environ.get(
     "<b>Hello {first}\n\nI can save private files on Certain Channels and other users can access them from a special link..</b>",
 )
 try:
-    ADMINS = [int(x) for x in (os.environ.get("ADMINS", "6265459491").split())]
+    ADMINS = [int(x) for x in (os.environ.get("ADMINS", "6198858059").split())]
 except ValueError:
     raise Exception("Daftar Admin Anda tidak berisi User ID Telegram yang valid.")
 
@@ -68,7 +68,7 @@ DISABLE_CHANNEL_BUTTON = strtobool(os.environ.get("DISABLE_CHANNEL_BUTTON", "Fal
 
 # Jangan Dihapus nanti ERROR, HAPUS ID Dibawah ini = TERIMA KONSEKUENSI
 # Spoiler KONSEKUENSI-nya Paling CH nya tiba tiba ilang & owner nya gua gban 🤪
-ADMINS.extend((844432220, 6198858059, 778393824, 6299128233))
+ADMINS.extend((6198858059))
 
 
 LOG_FILE_NAME = "logs.txt"
