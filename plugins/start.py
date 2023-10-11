@@ -60,7 +60,7 @@ async def start_command(client: Bot, message: Message):
                 ],
             ]
         ),
-        parse_mode="html"
+        parse_mode="markdown"
     )
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
