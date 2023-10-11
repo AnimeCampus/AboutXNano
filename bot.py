@@ -10,7 +10,7 @@ from config import (
     TG_BOT_TOKEN,
     TG_BOT_WORKERS,
 )
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton  # corrected 'pyrogram.type' to 'pyrogram.types'
 
 
 class Bot(Client):
@@ -43,20 +43,18 @@ class Bot(Client):
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
 
-            # Send a test message with an image and an inline button
-            test_message = await self.send_photo(
+            # Send a test message with just inline buttons and text
+            await self.send_message(
                 chat_id=db_channel.id,
-                photo="https://telegra.ph/file/f0bb24dae0b860462acdf.png",
-                caption="Bᴏᴛ ɪs ғᴜʟʟʏ ᴅᴇᴘʟᴏʏᴇᴅ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ ɴᴏᴡ!!",
+                text="Bᴏᴛ ɪs ғᴜʟʟʏ ᴅᴇᴘʟᴏʏᴇᴅ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ ɴᴏᴡ!!",
                 reply_markup=InlineKeyboardMarkup(
                     [[                 
                         InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ", url="https://t.me/AboutXNano"),
                         InlineKeyboardButton("Oᴡɴᴇʀ", url=f"https://t.me/{OWNER}")                            
                     ]]
                 ),
-                disable_notification=True
+                disable_notification=False
             )
-            await test_message.delete()
             self.LOGGER(__name__).info(
                 f"CHANNEL_ID Database detected!\n┌ Title: {db_channel.title}\n└ Chat ID: {db_channel.id}\n——"
             )
