@@ -59,8 +59,7 @@ async def start_command(client: Bot, message: Message):
                     InlineKeyboardButton("Close", callback_data="close")
                 ],
             ]
-        ),
-        parse_mode="markdown"
+        ),        
     )
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
