@@ -11,7 +11,7 @@ from config import (
     TG_BOT_WORKERS,
 )
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+from pyrogram import filters
 
 class Bot(Client):
     def __init__(self):
@@ -65,7 +65,6 @@ class Bot(Client):
             self.LOGGER(__name__).info("Bot stopped. Join the group https://t.me/SharingUserbot for assistance.")
             sys.exit()
 
-        self.set_parse_mode("html")
         self.LOGGER(__name__).info(
             f"[🔥 SUCCESSFULLY ACTIVATED! 🔥]\n\nBOT Created by @{OWNER}\nIf @{OWNER} needs assistance, please ask in the group https://t.me/SharingUserbot"
         )
@@ -73,14 +72,12 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
-
-    async def on_message(self, msg):
-        if not msg.command:
-            try:
-                await self.forward_messages(CHANNEL_ID, msg.chat.id, [msg.message_id])
-                user = msg.from_user
-                username = f"@{user.username}" if user.username else user.first_name
-                await self.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {msg.text}")
-            except Exception as e:
-                self.LOGGER(__name__).warning(e)
-
+    
+    @Bot.on_message(filters.text & ~filters.command)
+    async def handle_text_message(client, message):
+        try:
+            user = message.from_user
+            username = f"@{user.username}" if user.username else user.first_name
+            await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {message.text}")
+        except Exception as e:
+            LOGGER(__name__).warning(e)
