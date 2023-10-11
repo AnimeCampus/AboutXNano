@@ -60,7 +60,7 @@ async def start_command(client: Bot, message: Message):
     except:
         pass  # This will catch exceptions and do nothing
     await message.reply_photo(
-        photo="https://telegra.ph/file/cfd12e94fbeb3a4e35b7d.png",
+        photo="https://telegra.ph/file/f0bb24dae0b860462acdf.png",
         caption="Wᴇʟᴄᴏᴍᴇ ᴛᴏ Aʙᴏᴜᴛ Nᴀɴᴏ ʙᴏᴛ.\nғᴏʀ ᴍᴏʀᴇ ɪɴғᴏ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘.",
         reply_markup=InlineKeyboardMarkup(
             [
@@ -69,7 +69,7 @@ async def start_command(client: Bot, message: Message):
                 ],
                 [
                     InlineKeyboardButton(text="Hᴇʟᴘ", callback_data="help"),
-                    InlineKeyboardButton(text="Oᴡɴᴇʀ", url="https://t.me/GenXNano"),
+                    InlineKeyboardButton(text="Cʜᴀɴɴᴇʟ", url="https://t.me/AboutXNano"),
                 ],
                 [
                     InlineKeyboardButton(text="Cʟᴏsᴇ", callback_data="close")
