@@ -11,6 +11,9 @@ def start_button(client):
         buttons = [
             [
                 InlineKeyboardButton(text="Help", callback_data="help"),
+                InlineKeyboardButton(text="Contact", url="GenXNano.t.me"),
+            ],
+            [
                 InlineKeyboardButton(text="Close ", callback_data="close"),
             ],
         ]
@@ -33,7 +36,10 @@ def start_button(client):
             ],
             [
                 InlineKeyboardButton(text="Help", callback_data="help"),
-                InlineKeyboardButton(text="Close", callback_data="close"),
+                InlineKeyboardButton(text="Contact", url="GenXNano.t.me"),
+            ],
+            [
+                InlineKeyboardButton(text="Close ", callback_data="close"),
             ],
         ]
         return buttons
