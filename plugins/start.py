@@ -5,16 +5,8 @@
 import asyncio
 from datetime import datetime
 from time import time
-
 from bot import Bot
-from config import (
-    ADMINS,
-    CUSTOM_CAPTION,
-    DISABLE_CHANNEL_BUTTON,
-    FORCE_MSG,
-    PROTECT_CONTENT,
-    START_MSG,
-)
+from config import ADMINS   
 from database.sql import add_user, full_userbase, query_msg
 from pyrogram import filters
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked
