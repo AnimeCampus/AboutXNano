@@ -60,7 +60,7 @@ async def start_command(client: Bot, message: Message):
     except:
         pass  # This will catch exceptions and do nothing
 
-@app.on_message(filters.command("start"))
+@Bot.on_message(filters.command("start"))
 async def start_command(client, message):
     # Send a welcome message with an image
     await message.reply_photo(
