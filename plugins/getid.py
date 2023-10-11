@@ -2,7 +2,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 from bot import Bot
 
-@Bot.on_message(filters.command("id") & filters.private)
+@Bot.on_message(filters.command("id"))
 async def show_id(client, message):
     chat_type = message.chat.type
 
