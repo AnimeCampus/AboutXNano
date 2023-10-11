@@ -70,10 +70,15 @@ async def start_command(client, message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
+                    InlineKeyboardButton(text="About", callback_data="about"),
+                ],
+                [
                     InlineKeyboardButton(text="Help", callback_data="help"),
                     InlineKeyboardButton(text="Contact", url="https://t.me/GenXNano"),
                 ],
-                [InlineKeyboardButton(text="Close", callback_data="close")],
+                [
+                    InlineKeyboardButton(text="Close", callback_data="close")
+                ],
             ]
         ),
     )
