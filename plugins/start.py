@@ -83,38 +83,43 @@ async def start_command(client: Bot, message: Message):
         else None
     )
 
-    try:
-        await add_user(id, user_name)
-    except:
-        pass  # This will catch exceptions and do nothing
+    # Check if the user is already in the database
+    user_in_db = await check_user_in_db(id)
+    
+    if not user_in_db:
+        try:
+            await add_user(id, user_name)
+        except:
+            pass  # This will catch exceptions and do nothing
 
-    # Send a welcome message to the user
-    await message.reply(
-        "👋 <b>Welcome to About Nano Bot</b> 🤖\n\n"
-        "Use the buttons below to explore the features:",
-        reply_markup=InlineKeyboardMarkup(
-            [
+        # Send a welcome message to the user
+        await message.reply(
+            "👋 <b>Welcome to About Nano Bot</b> 🤖\n\n"
+            "Use the buttons below to explore the features:",
+            reply_markup=InlineKeyboardMarkup(
                 [
-                    InlineKeyboardButton("About", callback_data="about"),
-                ],
-                [
-                    InlineKeyboardButton("Help", callback_data="help"),
-                    InlineKeyboardButton("Channel", url="https://t.me/AboutXNano"),
-                ],
-                [
-                    InlineKeyboardButton("Close", callback_data="close")
-                ],
-            ]
-        ),
-    )
+                    [
+                        InlineKeyboardButton("About", callback_data="about"),
+                    ],
+                    [
+                        InlineKeyboardButton("Help", callback_data="help"),
+                        InlineKeyboardButton("Channel", url="https://t.me/AboutXNano"),
+                    ],
+                    [
+                        InlineKeyboardButton("Close", callback_data="close")
+                    ],
+                ]
+            ),
+        )
 
-    # Send a message to the database channel about the new user
-    try:
-        username = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
-        user_id = message.from_user.id
-        await client.send_message(CHANNEL_ID, f"New user started the bot: {username} (ID: {user_id})")
-    except Exception as e:
-        LOGGER(__name__).warning(e)
+        # Send a message to the database channel about the new user
+        try:
+            username = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
+            user_id = message.from_user.id
+            await client.send_message(CHANNEL_ID, f"New user started the bot: {username} (ID: {user_id})")
+        except Exception as e:
+            LOGGER(__name__).warning(e)
+
 
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
