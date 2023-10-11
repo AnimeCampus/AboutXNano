@@ -46,7 +46,7 @@ async def _human_time_duration(seconds):
             parts.append(f'{amount} {unit}{"" if amount == 1 else "s"}')
     return ", ".join(parts)
 
-@Bot.on_message(filters.command("start") & filters.private & subsall & subsch & subsgc)
+@Bot.on_message(filters.command("start"))
 async def start_command(client: Bot, message: Message):
     id = message.from_user.id
     user_name = (
@@ -59,10 +59,6 @@ async def start_command(client: Bot, message: Message):
         await add_user(id, user_name)
     except:
         pass  # This will catch exceptions and do nothing
-
-@Bot.on_message(filters.command("start"))
-async def start_command(client, message):
-    # Send a welcome message with an image
     await message.reply_photo(
         photo="https://telegra.ph/file/cfd12e94fbeb3a4e35b7d.png",
         caption="Welcome to my bot! More info click on help about button..",
