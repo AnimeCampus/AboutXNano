@@ -58,7 +58,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         except BaseException:
             pass
 
-@bot.on_message(filters.command("sudolist") & filters.user(ADMINS))
+@Bot.on_message(filters.command("sudolist") & filters.user(ADMINS))
 async def su_list_command(client: Client, message: Message):
     users_list = ""
     for user_id in ADMINS:
