@@ -12,7 +12,7 @@ from config import (
 )
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import filters
-from bot import Bot
+
 
 class Bot(Client):
     def __init__(self):
@@ -74,7 +74,8 @@ class Bot(Client):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
     
-    @Bot.on_message(filters.text & ~filters.command)
+
+@Bot.on_message(filters.text & ~filters.command)
     async def handle_text_message(client, message):
         try:
             user = message.from_user
