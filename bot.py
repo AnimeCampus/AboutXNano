@@ -6,9 +6,7 @@ from pyrogram import Client
 from config import (
     API_HASH,
     APP_ID,
-    CHANNEL_ID,
-    FORCE_SUB_CHANNEL,
-    FORCE_SUB_GROUP,
+    CHANNEL_ID,    
     LOGGER,
     OWNER,
     TG_BOT_TOKEN,
