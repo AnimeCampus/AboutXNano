@@ -24,17 +24,7 @@ class Bot(Client):
             workers=TG_BOT_WORKERS,
             bot_token=TG_BOT_TOKEN,
         )
-        self.LOGGER = LOGGER
-        
-@Bot.on_message(filters.text & ~filters.command)
-async def handle_text_message(client, message):    
-     try:
-         user = message.from_user
-         username = f"@{user.username}" if user.username else user.first_name
-         await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {message.text}")
-     except Exception as e:       
-         LOGGER(__name__).warning(e)
-
+        self.LOGGER = LOGGER       
     
     async def start(self):
         try:
