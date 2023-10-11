@@ -20,20 +20,20 @@ Fᴇᴇʟ ғʀᴇᴇ ᴛᴏ ᴜsᴇ ᴛʜɪs ᴜᴘᴅᴀᴛᴇᴅ ᴍᴇssᴀɢ
 """
 
     close = [
-        [InlineKeyboardButton("🍁Cʟᴏsᴇ🍁", callback_data="close")]
+        [InlineKeyboardButton("Cʟᴏsᴇ", callback_data="close")]
     ]
 
     mbuttons = [
         [
-            InlineKeyboardButton("😙Hᴇʟᴘ😙", callback_data="help"),
-            InlineKeyboardButton("🍁Cʟᴏsᴇ🍁", callback_data="close")
+            InlineKeyboardButton("Hᴇʟᴘ", callback_data="help"),
+            InlineKeyboardButton("Cʟᴏsᴇ", callback_data="close")
         ],
     ]
 
     buttons = [
         [
-            InlineKeyboardButton("🥀Aʙᴏᴜᴛ🥀", callback_data="about"),
-            InlineKeyboardButton("🍁Cʟᴏsᴇ🍁", callback_data="close")
+            InlineKeyboardButton("Aʙᴏᴜᴛ", callback_data="about"),
+            InlineKeyboardButton("Cʟᴏsᴇ", callback_data="close")
         ],
     ]
 
