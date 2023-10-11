@@ -48,54 +48,7 @@ class Bot(Client):
             )
             sys.exit()
 
-        if FORCE_SUB_CHANNEL:
-            try:
-                info = await self.get_chat(FORCE_SUB_CHANNEL)
-                link = info.invite_link
-                if not link:
-                    await self.export_chat_invite_link(FORCE_SUB_CHANNEL)
-                    link = info.invite_link
-                self.invitelink = link
-                self.LOGGER(__name__).info(
-                    f"FORCE_SUB_CHANNEL detected!\n┌ Title: {info.title}\n└ Chat ID: {info.id}\n——"
-                )
-            except Exception as a:
-                self.LOGGER(__name__).warning(a)
-                self.LOGGER(__name__).warning(
-                    "Bot tidak dapat Mengambil link invite dari FORCE_SUB_CHANNEL!"
-                )
-                self.LOGGER(__name__).warning(
-                    f"Pastikan @{self.username} adalah admin di Channel Tersebut, Chat ID F-Subs Channel Saat Ini: {FORCE_SUB_CHANNEL}"
-                )
-                self.LOGGER(__name__).info(
-                    "Bot Berhenti. Gabung Group https://t.me/SharingUserbot untuk Bantuan"
-                )
-                sys.exit()
-
-        if FORCE_SUB_GROUP:
-            try:
-                info = await self.get_chat(FORCE_SUB_GROUP)
-                link = info.invite_link
-                if not link:
-                    await self.export_chat_invite_link(FORCE_SUB_GROUP)
-                    link = info.invite_link
-                self.invitelink2 = link
-                self.LOGGER(__name__).info(
-                    f"FORCE_SUB_GROUP detected!\n┌ Title: {info.title}\n└ Chat ID: {info.id}\n——"
-                )
-            except Exception as a:
-                self.LOGGER(__name__).warning(a)
-                self.LOGGER(__name__).warning(
-                    "Bot tidak dapat Mengambil link invite dari FORCE_SUB_GROUP!"
-                )
-                self.LOGGER(__name__).warning(
-                    f"Pastikan @{self.username} adalah admin di Group Tersebut, Chat ID F-Subs Group Saat Ini: {FORCE_SUB_GROUP}"
-                )
-                self.LOGGER(__name__).info(
-                    "Bot Berhenti. Gabung Group https://t.me/SharingUserbot untuk Bantuan"
-                )
-                sys.exit()
-
+       
         try:
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
