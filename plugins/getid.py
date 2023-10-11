@@ -1,20 +1,15 @@
-"""Get id of the replied user
-Syntax: /id"""
-
 from pyrogram import filters
 from pyrogram.types import Message
-
 from bot import Bot
 
-
 @Bot.on_message(filters.command("id") & filters.private)
-async def showid(client, message):
+async def show_id(client, message):
     chat_type = message.chat.type
 
     if chat_type == "private":
         user_id = message.chat.id
         await message.reply_text(
-            f"<b>User ID anda adalah:</b> <code>{user_id}</code>", quote=True
+            f"<b>Your User ID is:</b> <code>{user_id}</code>", quote=True
         )
 
     elif chat_type in ["group", "supergroup"]:
@@ -32,7 +27,6 @@ async def showid(client, message):
                 f"<code>{file_info.file_id}</code>\n"
             )
         await message.reply_text(_id, quote=True)
-
 
 def get_file_id(msg: Message):
     if msg.media:
