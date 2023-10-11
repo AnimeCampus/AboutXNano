@@ -24,7 +24,6 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from helper_func import decode, get_messages, subsall, subsch, subsgc
 
-from .button import fsub_button, start_button
 
 START_TIME = datetime.utcnow()
 START_TIME_ISO = START_TIME.replace(microsecond=0).isoformat()
