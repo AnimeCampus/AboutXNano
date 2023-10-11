@@ -87,24 +87,35 @@ async def start_command(client: Bot, message: Message):
         await add_user(id, user_name)
     except:
         pass  # This will catch exceptions and do nothing
-    await message.reply_photo(
-        photo="https://telegra.ph/file/f0bb24dae0b860462acdf.png",
-        caption="Wᴇʟᴄᴏᴍᴇ ᴛᴏ Aʙᴏᴜᴛ Nᴀɴᴏ ʙᴏᴛ.\nғᴏʀ ᴍᴏʀᴇ ɪɴғᴏ ᴄʟɪᴄᴋ ᴏɴ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ 🔘.",
+
+    # Send a welcome message to the user
+    await message.reply(
+        "👋 <b>Welcome to About Nano Bot</b> 🤖\n\n"
+        "Use the buttons below to explore the features:",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="Aʙᴏᴜᴛ", callback_data="about"),
+                    InlineKeyboardButton("About", callback_data="about"),
                 ],
                 [
-                    InlineKeyboardButton(text="Hᴇʟᴘ", callback_data="help"),
-                    InlineKeyboardButton(text="Cʜᴀɴɴᴇʟ", url="https://t.me/AboutXNano"),
+                    InlineKeyboardButton("Help", callback_data="help"),
+                    InlineKeyboardButton("Channel", url="https://t.me/AboutXNano"),
                 ],
                 [
-                    InlineKeyboardButton(text="Cʟᴏsᴇ", callback_data="close")
+                    InlineKeyboardButton("Close", callback_data="close")
                 ],
             ]
         ),
     )
+
+    # Send a message to the database channel about the new user
+    try:
+        username = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
+        user_id = message.from_user.id
+        await client.send_message(CHANNEL_ID, f"New user started the bot: {username} (ID: {user_id})")
+    except Exception as e:
+        LOGGER(__name__).warning(e)
+
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
