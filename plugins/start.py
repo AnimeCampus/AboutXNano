@@ -55,8 +55,22 @@ async def handle_send_command(client, message):
             await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
         
+@Bot.on_message(filters.command("ans") & filters.user(ADMINS))
+async def answer_user(client, message):
+    try:
+        # Check if the command has the necessary arguments
+        if len(message.command) < 3:
+            await message.reply("Usage: /ans user_id message")
+            return
 
+        user_id = int(message.command[1])
+        text = " ".join(message.command[2:])
 
+        # Send the reply to the specified user
+        await client.send_message(user_id, text)
+        await message.reply(f"Your message has been sent to user with ID {user_id}.")
+    except Exception as e:
+        
 
 @Bot.on_message(filters.command("start"))
 async def start_command(client: Bot, message: Message):
