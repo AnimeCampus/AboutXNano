@@ -45,7 +45,7 @@ async def handle_send_command(client, message):
             text = " ".join(message.command[1])
             
             # Send the extracted text to the database channel
-            await client.send_message(CHANNEL_ID, f"Message from {username} (ID: {user.id}): {text}")
+            await client.send_message(CHANNEL_ID, f"@GenXNano You Have Message From\n\n{username}\n(ID: {user.id}):\n```{text}```")
             await message.reply("Your message has been sent to the database channel.")
         else:
             await message.reply("Please provide a message to send with the /send command.")
@@ -108,7 +108,7 @@ async def start_command(client: Bot, message: Message):
     try:
         username = f"@{message.from_user.username}" if message.from_user.username else message.from_user.first_name
         user_id = message.from_user.id
-        await client.send_message(CHANNEL_ID, f"New user started the bot: {username}\n(ID: {user_id})")
+        await client.send_message(CHANNEL_ID, f"#NewUser:\n{username}\n(ID: {user_id})")
     except Exception as e:
         LOGGER(__name__).warning(e)
 
