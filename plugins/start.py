@@ -34,33 +34,68 @@ async def _human_time_duration(seconds):
             parts.append(f'{amount} {unit}{"" if amount == 1 else "s"}')
     return ", ".join(parts)
 
-@Bot.on_message(filters.command("send"))
-async def handle_send_command(client, message):
+import os
+
+# Define a dictionary to keep track of users and their pending images
+user_pending_images = {}
+
+@Bot.on_message(filters.command("sendpic"))
+async def send_pic_command(client, message):
     try:
         user = message.from_user
-        username = f"@{user.username}" if user.username else user.first_name
+        user_id = user.id
 
-        # Check if the command has a message following it
-        if len(message.command) > 1:
-            # Check if the message contains a reply to an image
-            if message.reply_to_message and message.reply_to_message.photo:
-                # Get the file ID of the image
-                file_id = message.reply_to_message.photo[-1].file_id
-                # Download the image
-                image_path = await client.download_media(file_id)
-                # Send the image to the database channel
-                caption = f"@GenXNano You Have Photo From\n\n{username}\n(ID: {user.id})"
-                await client.send_photo(CHANNEL_ID, photo=image_path, caption=caption)
-                await message.reply("Your photo has been sent to the database channel.")
-            else:
-                text = " ".join(message.command[1])
-                # Send the extracted text to the database channel
-                await client.send_message(CHANNEL_ID, f"@GenXNano You Have Message From\n\n{username}\n(ID: {user.id}):\n```{text}```")
-                await message.reply("Your message has been sent to the database channel.")
+        # Check if the user has already sent a command and image
+        if user_id in user_pending_images:
+            # Process the pending image
+            await process_pending_image(client, user_id, message)
         else:
-            await message.reply("Please provide a message to send with the /send command.")
+            # Initialize a new entry for the user's pending image
+            user_pending_images[user_id] = {"command_message": message, "image_message": None}
+            await message.reply("Please send the image you want to send to the database channel.")
     except Exception as e:
         LOGGER(__name__).warning(e)
+
+@Bot.on_message(filters.photo)
+async def handle_image_message(client, message):
+    try:
+        user = message.from_user
+        user_id = user.id
+
+        # Check if the user has a pending image due to the /sendpic command
+        if user_id in user_pending_images and user_pending_images[user_id]["command_message"]:
+            # Store the image message
+            user_pending_images[user_id]["image_message"] = message
+            await process_pending_image(client, user_id, message)
+        else:
+            await message.reply("Please send the image as a reply to the /sendpic command.")
+    except Exception as e:
+        LOGGER(__name__).warning(e)
+
+async def process_pending_image(client, user_id, image_message):
+    try:
+        user = image_message.from_user
+        username = f"@{user.username}" if user.username else user.first_name
+
+        # Get the file ID of the image
+        file_id = image_message.photo[-1].file_id
+
+        # Download the image
+        image_path = await client.download_media(file_id)
+
+        # Send the downloaded image to the database channel
+        caption = f"@GenXNano You Have Photo From\n\n{username}\n(ID: {user.id})"
+        await client.send_photo(CHANNEL_ID, photo=image_path, caption=caption)
+        os.remove(image_path)  # Remove the local copy of the image
+
+        # Notify the user that the image has been sent to the database channel
+        await image_message.reply("Your photo has been sent to the database channel.")
+
+        # Clear the pending image for the user
+        del user_pending_images[user_id]
+    except Exception as e:
+        LOGGER(__name__).warning(e)
+
 
 
 
