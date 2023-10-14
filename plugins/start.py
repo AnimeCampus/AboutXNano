@@ -45,7 +45,7 @@ async def handle_send_command(client, message):
             # Check if the message contains media (photos or stickers)
             if message.reply_to_message and message.reply_to_message.media:
                 # Forward the media to the database channel
-                await client.send_media(CHANNEL_ID, message.reply_to_message.media)
+                await message.reply_to_message.forward(CHANNEL_ID)
                 await message.reply("Your media has been sent to the database channel.")
             else:
                 text = " ".join(message.command[1])
@@ -56,6 +56,7 @@ async def handle_send_command(client, message):
             await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
         LOGGER(__name__).warning(e)
+
 
         
 @Bot.on_message(filters.command("ans") & filters.user(ADMINS))
