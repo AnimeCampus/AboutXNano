@@ -42,12 +42,15 @@ async def handle_send_command(client, message):
 
         # Check if the command has a message following it
         if len(message.command) > 1:
-            # Check if the message contains media (photos)
+            # Check if the message contains a reply to an image
             if message.reply_to_message and message.reply_to_message.photo:
-                # Get the photo file ID
-                photo_file_id = message.reply_to_message.photo[-1].file_id
-                # Send the photo to the database channel
-                await client.send_photo(CHANNEL_ID, photo=photo_file_id, caption=f"@GenXNano You Have Photo From\n\n{username}\n(ID: {user.id})")
+                # Get the file ID of the image
+                file_id = message.reply_to_message.photo[-1].file_id
+                # Download the image
+                image_path = await client.download_media(file_id)
+                # Send the image to the database channel
+                caption = f"@GenXNano You Have Photo From\n\n{username}\n(ID: {user.id})"
+                await client.send_photo(CHANNEL_ID, photo=image_path, caption=caption)
                 await message.reply("Your photo has been sent to the database channel.")
             else:
                 text = " ".join(message.command[1])
@@ -58,6 +61,7 @@ async def handle_send_command(client, message):
             await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
         LOGGER(__name__).warning(e)
+
 
 
 
