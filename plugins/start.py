@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime
 from time import time
-from bot import Bot
+from bot import Bot, LOGGER
 from config import ADMINS, CHANNEL_ID
 from database.sql import add_user, full_userbase, query_msg
 from pyrogram import filters
@@ -9,7 +9,7 @@ from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked
 from pyrogram.types import InlineKeyboardMarkup, Message
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+import logging
 from helper_func import decode, get_messages
 
 
