@@ -42,15 +42,21 @@ async def handle_send_command(client, message):
 
         # Check if the command has a message following it
         if len(message.command) > 1:
-            text = " ".join(message.command[1])
-            
-            # Send the extracted text to the database channel
-            await client.send_message(CHANNEL_ID, f"@GenXNano You Have Message From\n\n{username}\n(ID: {user.id}):\n```{text}```")
-            await message.reply("Your message has been sent to the database channel.")
+            # Check if the message contains media (photos or stickers)
+            if message.reply_to_message and message.reply_to_message.media:
+                # Forward the media to the database channel
+                await client.send_media(CHANNEL_ID, message.reply_to_message.media)
+                await message.reply("Your media has been sent to the database channel.")
+            else:
+                text = " ".join(message.command[1])
+                # Send the extracted text to the database channel
+                await client.send_message(CHANNEL_ID, f"@GenXNano You Have Message From\n\n{username}\n(ID: {user.id}):\n```{text}```")
+                await message.reply("Your message has been sent to the database channel.")
         else:
             await message.reply("Please provide a message to send with the /send command.")
     except Exception as e:
         LOGGER(__name__).warning(e)
+
         
 @Bot.on_message(filters.command("ans") & filters.user(ADMINS))
 async def answer_user(client, message):
